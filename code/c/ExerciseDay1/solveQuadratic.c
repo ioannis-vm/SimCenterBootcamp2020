@@ -20,8 +20,20 @@ int main(int argc, char **argv) {
   float a = atof(argv[1]);
   float b = atof(argv[2]);
   float c = atof(argv[3]);
+  float res1;
+  float res2;
 
-  printf("Have a Nice Day!\n");
-  return 0;
+  float x = b*b - 4*a*c;
+
+      if (x < 0.00) {
+        printf("No real solution\n");
+        exit(-1);
+      }
+
+      x = sqrt(x);
+      res1 = (b+x)/(2.00*a);
+      res2 = (b-x)/(2.00*a);
+
+      printf("Root1: %f\nRoot2: %f\n", res1, res2);
+    return 0;
 }
-

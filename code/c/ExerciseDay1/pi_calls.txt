@@ -1,0 +1,10 @@
+pi.out 10
+pi.out 100
+pi.out 1000
+pi.out 10000
+pi.out 100000
+pi.out 1000000
+pi.out 10000000
+pi.out 100000000
+pi.out 1000000000
+
