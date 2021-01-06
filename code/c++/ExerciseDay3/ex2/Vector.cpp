@@ -4,14 +4,15 @@
 
 Vector::Vector(int sz)
 {
-  size = 0;
+  size = sz;
   data = 0;
 }
 
 Vector::~Vector()
 {
-  if (data != 0)
-    ; // do something 
+  if (sz != 0) {
+    data = double[size];
+  }; // do something 
 }
 
 // some methods
@@ -31,7 +32,10 @@ Vector::zero(void)
 double 
 Vector::norm(void) const
 {
-  return 0; // more code here
+  double result = 0;
+  for (int i=0; i<size; i++)
+    result += data[i]*data[i];
+  return sqrt(result);
 }
 
 double 
