@@ -5,31 +5,41 @@
 Vector::Vector(int sz)
 {
   size = sz;
-  data = 0;
+  data = new double[size];
+  /* The fastest way is this */
+  for (int i=0; i<sz; i++) {
+    data[i] = 0;
+  }
+  /* another way (the slowest) */
+  this->zero();
+
+  /* another way (this is the FASTEST)*/
+  double *dataPtr = data;
+  for (int i=0; i<sz; i++)
+    *dataPtr++ = 0;
 }
 
 Vector::~Vector()
 {
-  if (sz != 0) {
-    data = double[size];
-  }; // do something 
+  if (data!=0)
+    delete [] data; // without [] it would only free the first component
 }
 
 // some methods
-int 
+int
 Vector::Size(void) const
 {
   return size;
 }
 
-void 
+void
 Vector::zero(void)
 {
   for (int i=0; i<size; i++)
     data[i] = 0;
 }
 
-double 
+double
 Vector::norm(void) const
 {
   double result = 0;
@@ -38,11 +48,11 @@ Vector::norm(void) const
   return sqrt(result);
 }
 
-double 
+double
 Vector::dot(const Vector &other) const
 {
   double result = 0;
-  
+
   if (other.size != size) {
     std::cerr << "Vector::dot ERROR vectors not of same size, returning 0\n";
     return result;
@@ -53,7 +63,7 @@ Vector::dot(const Vector &other) const
   return result;
 }
 
-void 
+void
 Vector::print(void)
 {
   for (int i=0; i<size; i++)
@@ -62,7 +72,7 @@ Vector::print(void)
 }
 
 // overload some operators to look Matlabish
-Vector 
+Vector
 Vector::operator+(const Vector &other) const
 {
   Vector result(size);
@@ -72,35 +82,35 @@ Vector::operator+(const Vector &other) const
     return result;
   }
 
-  
+
   for (int i=0; i<size; i++)
     result.data[i] = data[i] + other.data[i];
 
   return result;
 }
 
-void 
+void
 Vector::operator=(const Vector &other)
 {
   for (int i=0; i<size; i++)
-    data[i] = other.data[i];  
+    data[i] = other.data[i];
 }
 
-void 
+void
 Vector::operator+=(double val)
 {
   for (int i=0; i<size; i++)
-    data[i] += val;  
+    data[i] += val;
 }
 
-void 
+void
 Vector::operator+=(const Vector &other)
 {
   for (int i=0; i<size; i++)
-    data[i] += other.data[i];  
+    data[i] += other.data[i];
 }
 
-double 
+double
 Vector::operator()(int x) const
 {
   return data[x];
@@ -116,4 +126,3 @@ Vector::operator()(int x)
   }
   return data[x];
 }
-
