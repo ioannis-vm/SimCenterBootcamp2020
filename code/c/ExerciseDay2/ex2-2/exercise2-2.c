@@ -1,23 +1,31 @@
 #include <stdio.h>
 #include <stdlib.h>
-
 #include "stresstransform.h"
 
 
 int main(int argc, char **argv) {
 
-	STRESS S0;
-	STRESS Sp;
+  if (argc != 2) {
+    printf("Usage: appName increment\n");
+    exit(-1);
+  }
 
-	S0.sigx = 12.0;
-	S0.sigy = -5.5;
-	S0.tau  =  3.5;
+  // Input variables
+  float increment = atof(argv[1]);
 
-	StressTransform(S0, &Sp, 0.0);
-	printf("sigx' = %12.6f\nsigy' = %12.6f\ntau'  = %12.6f\n\n", Sp.sigx, Sp.sigy, Sp.tau);
+  // Internal variables
+  STRESS S0;
+  STRESS Sp;
+  float angle = 0;
 
-	StressTransform(S0, &Sp, 25.0);
-	printf("sigx' = %12.6f\nsigy' = %12.6f\ntau'  = %12.6f\n\n", Sp.sigx, Sp.sigy, Sp.tau);
+  S0.sigx = 12.0;
+  S0.sigy = -5.5;
+  S0.tau  =  3.5;
+
+  while (angle <= 180.) {
+    StressTransform(S0, &Sp, angle);
+    printf("%12.6f, %12.6f, %12.6f\n", Sp.sigx, Sp.sigy, Sp.tau);
+    angle += increment;
+  }
+
 }
-
-

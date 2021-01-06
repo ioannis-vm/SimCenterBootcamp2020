@@ -1,0 +1,1 @@
+/bin/cc   -rdynamic CMakeFiles/Exercise2-4.dir/exercise2-4.c.o CMakeFiles/Exercise2-4.dir/stresstransform.c.o  -o Exercise2-4  -lm 
